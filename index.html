@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loxone Lighting Control Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        #dashboard {
+            background-color: #ccc;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #dashboard h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        #tile {
+            width: 50px; 
+            height: 50px; 
+            background-color: #3498db;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        #serverAddress, #controllerName, #iconInput {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="dashboard">
+        <h1>Loxone Lighting Control Dashboard</h1>
+
+        <label for="serverAddress">Loxone Miniserver Address:</label>
+        <input type="text" id="serverAddress" placeholder="Enter Miniserver Address">
+
+        <label for="controllerName">Lighting Controller Name:</label>
+        <input type="text" id="controllerName" placeholder="Enter Controller Name">
+
+        <label for="iconInput">Upload Icon:</label>
+        <input type="file" id="iconInput">
+
+        <div id="tile">OFF</div>
+    </div>
+
+    <script>
+        document.getElementById('tile').addEventListener('click', function () {
+         
+            var serverAddress = document.getElementById('serverAddress').value;
+            var controllerName = document.getElementById('controllerName').value;
+            var iconInput = document.getElementById('iconInput');
+
+            
+            if (!serverAddress || !controllerName) {
+                alert('Please enter Miniserver address and controller name.');
+                return;
+            }
+
+            console.log('API request to control lighting circuit:', serverAddress, controllerName);
+
+
+            var tile = document.getElementById('tile');
+            if (tile.textContent === 'OFF') {
+                tile.textContent = 'ON';
+                tile.style.backgroundColor = '#e74c3c'; // Red color for ON
+            } else {
+                tile.textContent = 'OFF';
+                tile.style.backgroundColor = '#3498db'; // Blue color for OFF
+            }
+        });
+    </script>
+</body>
+</html>
